@@ -1,6 +1,6 @@
 {% extends "layout.html" %}
 
-{% block title %}Login - UWI Statistical Digest Portal{% endblock %}
+{% block title %}Sign Up - UWI Statistical Digest Portal{% endblock %}
 
 {% block content %}
 <body class="bg-[#6b7f87] min-h-screen flex items-center justify-center p-4">
@@ -18,11 +18,11 @@
 
   <!-- Right -->
   <div class="bg-[#5a5a54] w-full md:w-2/3 lg:w-1/2 p-10 flex flex-col justify-center rounded-r-lg">
-    <h2 class="text-white text-3xl font-bold mb-8 text-center">LOGIN</h2>
-    <form method="POST" action="/login" class="flex flex-col space-y-4">
+    <h2 class="text-white text-3xl font-bold mb-8 text-center">SIGN UP</h2>
+    <form method="POST" action="/signup" class="flex flex-col space-y-4">
       <input name="username" value="bob" class="bg-[#a3a3a3] text-xs text-[#4a4a4a] placeholder-[#4a4a4a] rounded px-3 py-2 focus:outline-none" placeholder="Username" value="bobpass" type="text" required />
       <input name="password" class="bg-[#a3a3a3] text-xs text-[#4a4a4a] placeholder-[#4a4a4a] rounded px-3 py-2 focus:outline-none" placeholder="Password" type="password" required />
-      <button class="bg-[#e6e6e6] text-[#6b7f87] text-xs rounded py-2 hover:opacity-90" type="submit">Login</button>
+      <button class="bg-[#e6e6e6] text-[#6b7f87] text-xs rounded py-2 hover:opacity-90" type="submit">Sign Up</button>
     </form>
 
     <div class="flex items-center my-6 text-[#bfbfbf] text-xs">
@@ -32,7 +32,7 @@
     </div>
 
     <div class="text-center">
-      <a href="/signup" class="text-[#3b82f6] text-xs">Sign Up</a>
+      <a href="/" class="text-[#3b82f6] text-xs">Login</a>
     </div>
   </div>
 </div>

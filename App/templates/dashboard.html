@@ -1,0 +1,67 @@
+{% extends "layout.html" %}
+
+{% block title %}Dashboard - UWI Statistical Digest Portal{% endblock %}
+
+
+{% block content %}
+<body class="mt-8 bg-gray-300 min-h-screen flex flex-col items-center p-4">
+<header class="w-full max-w-5xl bg-[#36738E] rounded-md flex items-center justify-between p-4 mb-4 select-none">
+    <img alt="UWI logo with blue shield, orange and white elements, and text UWI below" class="h-16 w-16 object-contain" height="40" src="./static/images/uwi_logo.png" width="40"/>
+    <div class="text-white text-center font-sans flex-1">
+        <p class="text-lg font-semibold leading-tight">
+            UWI STATISTICS PORTAL
+        </p>
+        <p class="text-lg font-semibold leading-tight flex-1">
+            LOGGED IN AS: {{ user.username.upper() }}
+        </p>
+    </div>
+</header>
+<main class="w-full max-w-5xl flex flex-col md:flex-row gap-4">
+    <!-- Sidebar -->
+    <nav class="bg-[#36738E] rounded-md flex flex-col items-center py-6 px-4 min-w-[160px] md:min-w-[180px]">
+     <button class="bg-white text-black rounded-full w-full py-2 mb-4 text-center btn-text font-sans font-semibold" type="button">
+      Dashboard
+     </button>
+     <button class="bg-white text-black rounded-full w-full py-2 mb-4 text-center btn-text font-sans font-semibold" type="button">
+      Download Template
+     </button>
+     <button class="bg-white text-black rounded-full w-full py-2 mb-4 text-center btn-text font-sans font-semibold" type="button">
+      Upload Sheet
+     </button>
+     <button class="bg-white text-black rounded-full w-full py-2 mb-4 text-center btn-text font-sans font-semibold" type="button">
+      Generate Report
+     </button>
+     <button class="bg-white text-black rounded-full w-full py-2 mb-6 text-center btn-text font-sans font-semibold" type="button">
+      View Report
+     </button>
+     <a href="/logout">
+     <div class="flex flex-col items-center text-white text-xs font-sans">
+      <i class="fas fa-file-export fa-lg mb-1">
+      </i>
+      
+    </a>
+        <span>
+        LOG-OUT
+       </span>
+     </div>
+    </nav>
+    <!-- Content -->
+    <section class=" flex-1 flex flex-col gap-4">
+     <div class="bg-gray-600 rounded-md p-3 text-white font-sans text-xs leading-tight min-h-[210px]">
+      WELCOME!
+     </div>
+     <div class="bg-gray-600 rounded-md p-3 text-white font-sans text-xs leading-tight min-h-[150px] flex items-start gap-2">
+      <i class="fas fa-exclamation-circle mt-1">
+      </i>
+      <span>
+       Important Guide
+      </span>
+     </div>
+    </section>
+   </main>
+</body>
+   {% endblock %}
+ 
+ 
+
+ 

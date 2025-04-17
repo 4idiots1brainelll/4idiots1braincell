@@ -3,6 +3,7 @@ from flask_jwt_extended import jwt_required, current_user, unset_jwt_cookies, se
 
 
 from.index import index_views
+from.dashboard import dashboard_views
 
 from App.controllers import (
     login
@@ -36,12 +37,15 @@ def login_action():
         flash('Bad username or password given'), 401
     else:
         flash('Login Successful')
+        response = redirect(url_for('dashboard_views.dashboard_page'))
         set_access_cookies(response, token) 
     return response
 
+
+
 @auth_views.route('/logout', methods=['GET'])
 def logout_action():
-    response = redirect(request.referrer) 
+    response = redirect(url_for('index_views.index_page')) 
     flash("Logged Out!")
     unset_jwt_cookies(response)
     return response
