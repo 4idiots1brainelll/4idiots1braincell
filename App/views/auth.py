@@ -37,7 +37,7 @@ def login_action():
         flash('Bad username or password given'), 401
     else:
         flash('Login Successful')
-        response = redirect(url_for('dashboard_views.dashboard_page'))
+        response = redirect(url_for('viewreport_views.viewreport_page'))
         set_access_cookies(response, token) 
     return response
 
