@@ -24,22 +24,22 @@
      
     <nav class="bg-[#36738E] rounded-md flex flex-col items-center py-6 px-4 min-w-[160px] md:min-w-[180px]">
         <a href="/dashboard">
-        <button class="bg-white text-black rounded-full w-full py-2 mb-4 text-center btn-text font-sans font-semibold" type="button">
+        <button class="bg-white text-black rounded-full w-full py-2 mb-4 text-center btn-text font-sans font-semibold same-size-btn" type="button">
          Dashboard
         </button>
         </a>
         <a href="/download">
-        <button class="bg-white text-black rounded-full w-full py-2 mb-4 text-center btn-text font-sans font-semibold" type="button">
+        <button class="bg-white text-black rounded-full w-full py-2 mb-4 text-center btn-text font-sans font-semibold same-size-btn" type="button">
          Download Template
         </button>
         </a>
-        <button class="bg-white text-black rounded-full w-full py-2 mb-4 text-center btn-text font-sans font-semibold" type="button">
+        <button class="bg-white text-black rounded-full w-full py-2 mb-4 text-center btn-text font-sans font-semibold same-size-btn" type="button">
          Upload Sheet
         </button>
-        <button class="bg-white text-black rounded-full w-full py-2 mb-4 text-center btn-text font-sans font-semibold" type="button">
+        <button class="bg-white text-black rounded-full w-full py-2 mb-4 text-center btn-text font-sans font-semibold same-size-btn" type="button">
          Generate Report
         </button>
-        <button class="bg-white text-black rounded-full w-full py-2 mb-6 text-center btn-text font-sans font-semibold" type="button">
+        <button class="bg-white text-black rounded-full w-full py-2 mb-6 text-center btn-text font-sans font-semibold same-size-btn" type="button">
          View Report
         </button>
         <a href="/logout">
@@ -62,12 +62,36 @@
         Select Template
        </label>
        <select aria-label="Select Template" class="w-48 rounded-md p-2 mb-12 text-black" id="template-select">
-        <option disabled="" selected="" value="">
+        <option value="/static/files/template1.xlsx">Temp1
+        </option>
+        <option value="/static/files/template2.xlsx">Temp2
+        </option>
+        <option value="/static/files/template3.xlsx">Temp3
         </option>
        </select>
-       <button class="bg-white text-black text-xs font-extrabold py-2 rounded-full w-40">
+    
+       <button id="download-btn" class="bg-white text-black text-xs font-extrabold py-2 rounded-full w-40">
         Download
        </button>
+       <script>
+        document.getElementById('download-btn').addEventListener('click', function() {
+          var select = document.getElementById('template-select');
+          var fileUrl = select.value;
+          if (!fileUrl) {
+            alert('Please select a template to download.');
+            return;
+          }
+          // Create a temporary anchor to trigger the download
+          var a = document.createElement('a');
+          a.href = fileUrl;
+          // Optionally, set a default filename
+          var filename = fileUrl.split('/').pop();
+          a.download = filename;
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+        });
+      </script>
       </section>
      </main>
     </div>
