@@ -11,6 +11,7 @@ def load_config(app, overrides):
     app.config['TEMPLATES_AUTO_RELOAD'] = True
     app.config['PREFERRED_URL_SCHEME'] = 'https'
     app.config['UPLOADED_PHOTOS_DEST'] = "App/uploads"
+    app.config['TEMPLATE_UPLOAD_FOLDER'] = "App/static/uploads/templates" #
     app.config['JWT_ACCESS_COOKIE_NAME'] = 'access_token'
     app.config['JWT_ACCESS_TOKEN_EXPIRES'] = timedelta(hours=1) # 1 hour
     app.config["JWT_TOKEN_LOCATION"] = ["cookies", "headers"]
