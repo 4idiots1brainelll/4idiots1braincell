@@ -75,12 +75,9 @@
         Select Template
        </label>
        <select aria-label="Select Template" class="w-48 rounded-md p-2 mb-12 text-black" id="template-select">
-        <option value="/static/files/template1.xlsx">Temp1
-        </option>
-        <option value="/static/files/template2.xlsx">Temp2
-        </option>
-        <option value="/static/files/template3.xlsx">Temp3
-        </option>
+          {% for template in templates %}
+            <option value="{{ template.filepath }}">{{ template.filename }}</option>
+          {% endfor %}
        </select>
     
        <button id="download-btn" class="bg-white text-black text-xs font-extrabold py-2 rounded-full w-40">

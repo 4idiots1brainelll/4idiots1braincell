@@ -19,3 +19,7 @@ class FileConfig:
         app.config['MAX_CONTENT_LENGTH'] = cls.MAX_CONTENT_LENGTH
         app.config['UPLOADED_FILES_DEST'] = cls.UPLOAD_FOLDER
         app.config['UPLOADED_FILES_ALLOW'] = cls.ALLOWED_EXTENSIONS
+
+
+
+        
