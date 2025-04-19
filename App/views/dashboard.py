@@ -11,4 +11,6 @@ dashboard_views = Blueprint('dashboard_views', __name__, template_folder='../tem
 @jwt_required()
 def dashboard_page():
     user = current_user
+    if user.type == 'admin':
+        return render_template('admin_dashboard.html', user=user)
     return render_template('dashboard.html', user=user)
