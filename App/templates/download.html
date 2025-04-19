@@ -1,0 +1,100 @@
+{% extends "layout.html" %}
+
+{% block title %}Download - UWI Statistical Digest Portal{% endblock %}
+
+
+{% block content %}
+
+   <body class="bg-gray-300 min-h-screen flex items-center justify-center p-4">
+    <div class="max-w-6xl w-full space-y-4">
+     <!-- Header -->
+     <header class="bg-[#2c6b87] rounded-md shadow-md flex items-center justify-center space-x-4 p-4">
+        <img alt="UWI logo with blue shield, orange and white elements, and text UWI below" class="h-16 w-16 object-contain" height="40" src="./static/images/uwi_logo.png" width="40"/>
+      <div class="text-white text-center font-sans">
+       <p class="text-lg font-normal tracking-wide">
+        UWI STATISTICS PORTAL
+       </p>
+       <p class="text-lg font-normal tracking-wide font-semibold">
+        LOGGED IN AS: {{ user.username.upper() }}
+       </p>
+      </div>
+     </header>
+     <main class="flex flex-col md:flex-row gap-4">
+      <!-- Sidebar -->
+     
+    <nav class="bg-[#36738E] rounded-md flex flex-col items-center py-6 px-4 min-w-[160px] md:min-w-[180px]">
+        <a href="/dashboard">
+        <button class="bg-white text-black rounded-full w-full py-2 mb-4 text-center btn-text font-sans font-semibold same-size-btn" type="button">
+         Dashboard
+        </button>
+        </a>
+        <a href="/download">
+        <button class="bg-white text-black rounded-full w-full py-2 mb-4 text-center btn-text font-sans font-semibold same-size-btn" type="button">
+         Download Template
+        </button>
+        </a>
+        <button class="bg-white text-black rounded-full w-full py-2 mb-4 text-center btn-text font-sans font-semibold same-size-btn" type="button">
+         Upload Sheet
+        </button>
+        <button class="bg-white text-black rounded-full w-full py-2 mb-4 text-center btn-text font-sans font-semibold same-size-btn" type="button">
+         Generate Report
+        </button>
+        <button class="bg-white text-black rounded-full w-full py-2 mb-6 text-center btn-text font-sans font-semibold same-size-btn" type="button">
+         View Report
+        </button>
+        <a href="/logout">
+        <div class="flex flex-col items-center text-white text-xs font-sans">
+         <i class="fas fa-file-export fa-lg mb-1">
+         </i>
+         
+       </a>
+           <span>
+           LOG-OUT
+          </span>
+        </div>
+       </nav>
+      <!-- Main Content -->
+      <section class="bg-gray-600 rounded-md shadow-md flex flex-col items-center p-8 w-full md:flex-1">
+       <h2 class="text-white text-lg font-semibold mb-6">
+        Download Template
+       </h2>
+       <label class="text-gray-300 text-xs mb-3 block text-center" for="template-select">
+        Select Template
+       </label>
+       <select aria-label="Select Template" class="w-48 rounded-md p-2 mb-12 text-black" id="template-select">
+        <option value="/static/files/template1.xlsx">Temp1
+        </option>
+        <option value="/static/files/template2.xlsx">Temp2
+        </option>
+        <option value="/static/files/template3.xlsx">Temp3
+        </option>
+       </select>
+    
+       <button id="download-btn" class="bg-white text-black text-xs font-extrabold py-2 rounded-full w-40">
+        Download
+       </button>
+       <script>
+        document.getElementById('download-btn').addEventListener('click', function() {
+          var select = document.getElementById('template-select');
+          var fileUrl = select.value;
+          if (!fileUrl) {
+            alert('Please select a template to download.');
+            return;
+          }
+          // Create a temporary anchor to trigger the download
+          var a = document.createElement('a');
+          a.href = fileUrl;
+          // Optionally, set a default filename
+          var filename = fileUrl.split('/').pop();
+          a.download = filename;
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+        });
+      </script>
+      </section>
+     </main>
+    </div>
+   </body>
+{% endblock %}
+  
