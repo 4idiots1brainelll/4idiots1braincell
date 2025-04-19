@@ -1,0 +1,144 @@
+{% extends "layout.html" %}
+
+{% block title %}Upload Sheet - UWI Statistical Digest Portal{% endblock %}
+
+{% block content %}
+<style>
+    .same-size-btn {
+        width: 200px;
+        min-width: 200px;
+        max-width: 200px;
+    }
+</style>
+
+<body class="mt-8 bg-gray-300 min-h-screen flex flex-col items-center p-4">
+    
+    <header class="w-full max-w-5xl bg-[#8D362F] rounded-md flex items-center justify-between p-4 mb-4 select-none">
+        <img alt="UWI logo with blue shield, orange and white elements, and text UWI below" class="h-16 w-16 object-contain" height="40" src="./static/images/uwi_logo.png" width="40"/>
+        <div class="text-white text-center font-sans flex-1">
+            <p class="text-lg font-semibold leading-tight">
+                UWI STATISTICS PORTAL
+            </p>
+            <p class="text-lg font-semibold leading-tight flex-1">
+                ADMIN LOGGED IN AS: {{ user.username.upper() }}
+            </p>
+        </div>
+    </header>
+    
+    <main class="w-full max-w-5xl flex flex-col md:flex-row gap-4">
+        <!-- Sidebar with consistent button sizes -->
+        <nav class="bg-[#8D362F] rounded-md flex flex-col items-center py-6 px-4 min-w-[160px] md:min-w-[180px] space-y-6">
+            <a href="/admin_dashboard">
+             <button class="bg-white text-black rounded-full w-full py-2 mb-4 text-center btn-text font-sans font-semibold same-size-btn" type="button">
+              Dashboard
+             </button>
+            </a>
+        
+             <a href="/admin_uploadTemplate">
+             <button class="bg-white text-black rounded-full w-full py-2 mb-4 text-center btn-text font-sans font-semibold same-size-btn" type="button">
+              Upload Template
+             </button>
+             </a>
+             <button class="bg-white text-black rounded-full w-full py-2 mb-6 text-center btn-text font-sans font-semibold same-size-btn" type="button">
+              View Reports
+             </button>
+             <a href="/logout">
+             <div class="flex flex-col items-center text-white text-xs font-sans">
+              <i class="fas fa-file-export fa-lg mb-1">
+              </i>
+              
+            </a>
+                <span>
+                LOG-OUT
+               </span>
+             </div>
+            </nav>
+        
+        <!-- Main Content Area -->
+        <section class="flex-1 flex flex-col gap-4">
+            <div class="bg-gray-600 rounded-lg p-8 text-gray-800 font-sans min-h-[300px] flex flex-col items-center justify-center">
+                <h2 class="text-2xl font-semibold mb-6 text-center">Upload Sheet</h2>
+                
+                <form id="uploadForm" action="/upload" method="POST" enctype="multipart/form-data" class="w-full max-w-md">
+                    <!-- Dropzone area -->
+                    <div id="dropzone" class="bg-gray-600 border-2 border-dashed border-gray-300 rounded-lg p-8 mb-4 text-center cursor-pointer hover:bg-gray-50 transition">
+                        <div class="flex flex-col items-center justify-center space-y-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+                            </svg>
+                            
+                            <p class="text-gray-300">Drag & drop Excel file here</p>
+                            
+                            <!-- Flash messages display moved here -->
+                            {% with messages = get_flashed_messages(with_categories=true) %}
+                                {% if messages %}
+                                    {% for category, message in messages %}
+                                        <div class="p-2 text-center text-sm rounded 
+                                            {% if category == 'success' %}bg-green-100 text-green-800
+                                            {% else %}bg-red-100 text-red-800{% endif %}">
+                                            {{ message }}
+                                        </div>
+                                    {% endfor %}
+                                {% endif %}
+                            {% endwith %}
+                            
+                            <p class="text-white">*Supported file type xslm</p>
+                        </div>
+                        <input type="file" name="file" id="fileInput" accept=".xlsx,.xls" class="hidden">
+                    </div>
+                    
+                    <p class="text-sm text-gray-600 text-center mb-6">*Supported formats: .xlsx, .xls</p>
+                    
+                    <div class="text-center">
+                        <button class="bg-white text-black px-4 py-2 rounded-lg text-lg font-medium" style="border-radius: 8px;">
+                            Upload
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <!-- Minimal JavaScript for drag-and-drop functionality -->
+    <script>
+        const dropzone = document.getElementById('dropzone');
+        const fileInput = document.getElementById('fileInput');
+        
+        // Prevent default drag behaviors
+        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+            dropzone.addEventListener(eventName, preventDefaults, false);
+        });
+        
+        function preventDefaults(e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+        
+        // Highlight dropzone when item is dragged over it
+        ['dragenter', 'dragover'].forEach(eventName => {
+            dropzone.addEventListener(eventName, highlight, false);
+        });
+        
+        ['dragleave', 'drop'].forEach(eventName => {
+            dropzone.addEventListener(eventName, unhighlight, false);
+        });
+        
+        function highlight() {
+            dropzone.classList.add('border-blue-400', 'bg-blue-50');
+        }
+        
+        function unhighlight() {
+            dropzone.classList.remove('border-blue-400', 'bg-blue-50');
+        }
+        
+        // Handle dropped files
+        dropzone.addEventListener('drop', handleDrop, false);
+        
+        function handleDrop(e) {
+            const dt = e.dataTransfer;
+            const files = dt.files;
+            fileInput.files = files;
+        }
+    </script>
+</body>
+{% endblock %}
