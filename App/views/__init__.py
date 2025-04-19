@@ -6,7 +6,7 @@ from .auth import auth_views
 from .admin import setup_admin
 from .signup import signup_views
 from .dashboard import dashboard_views
+from .download import download_views
 
-
-views = [user_views, index_views, auth_views, signup_views, dashboard_views] 
+views = [user_views, index_views, auth_views, signup_views, dashboard_views,download_views] 
 # blueprints must be added to this list
