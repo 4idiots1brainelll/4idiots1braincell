@@ -1,0 +1,133 @@
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>UWI Statistics Portal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      /* Custom scrollbar for the table container */
+      .scrollbar-thin::-webkit-scrollbar {
+        height: 6px;
+      }
+      .scrollbar-thin::-webkit-scrollbar-thumb {
+        background-color: #4b5563;
+        border-radius: 10px;
+      }
+    </style>
+  </head>
+  <body class="bg-gray-300 min-h-screen flex items-start justify-center p-4">
+    <div class="w-full max-w-7xl bg-gray-300 rounded-md mt-4">
+      <!-- Header -->
+      <header
+        class="flex items-center bg-[#2f6d85] rounded-t-md p-4 space-x-4"
+        style="border: 3px solid #2f6d85"
+      >
+        <img
+          alt="UWI logo"
+          class="h-12 w-12 object-contain"
+          src="./static/images/uwi_logo.png"
+        />
+        <div class="flex flex-col text-white font-sans text-center w-full">
+          <span class="text-lg tracking-widest">UWI STATISTICS PORTAL</span>
+          <span class="text-lg font-semibold mt-1">LOGGED IN AS: BOB</span>
+        </div>
+      </header>
+
+      <main class="flex flex-col md:flex-row p-4 gap-4">
+        <!-- Sidebar -->
+        <aside
+          class="bg-[#2f6d85] rounded-md flex flex-col items-center py-6 px-4 space-y-4 w-full max-w-xs"
+          style="border: 3px solid #2f6d85"
+        >
+        <a
+        href="/dashboard"
+        class="bg-white text-black text-xs font-bold rounded-full w-36 py-2 hover:brightness-90 transition text-center"
+      >
+        Dashboard
+      </a>
+          <button
+            class="bg-white text-black text-xs font-bold rounded-full w-36 py-2 hover:brightness-90 transition"
+            type="button"
+          >
+            Download Template
+          </button>
+          <button
+            class="bg-white text-black text-xs font-bold rounded-full w-36 py-2 hover:brightness-90 transition"
+            type="button"
+          >
+            Upload Sheet
+          </button>
+          <button
+            class="bg-white text-black text-xs font-bold rounded-full w-36 py-2 hover:brightness-90 transition"
+            type="button"
+          >
+            Generate Report
+          </button>
+          <button
+            class="bg-gray-600 text-black text-xs font-semibold rounded-full w-36 py-2 cursor-default"
+            disabled
+            type="button"
+          >
+            View Report
+          </button>
+
+          <a
+            href="/logout"
+            class="mt-8 flex flex-col items-center text-white text-[9px] font-sans cursor-pointer"
+          >
+            <i class="fas fa-sign-out-alt text-xl mb-1"></i>
+            LOG-OUT
+          </a>
+        </aside>
+
+        <!-- Table container -->
+        <section
+          class="bg-gray-600 rounded-md flex-1 p-4"
+          style="border: 3px solid #2f6d85; min-height: 300px"
+        >
+          <div class="w-full overflow-x-auto scrollbar-thin">
+            <table class="w-full text-white text-[10px] font-sans table-fixed">
+              <thead>
+                <tr>
+                  <th class="w-1/6 text-left px-2 py-1">Tracking ID</th>
+                  <th class="w-1/4 text-left px-2 py-1">Name</th>
+                  <th class="w-1/6 text-left px-2 py-1">Date</th>
+                  <th class="w-1/6 text-left px-2 py-1">Sheet Upload</th>
+                  <th class="w-1/6 text-left px-2 py-1">File Status</th>
+                  <th class="w-1/6 text-center px-2 py-1">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="px-2 py-2"></td>
+                  <td class="px-2 py-2"></td>
+                  <td class="px-2 py-2"></td>
+                  <td class="px-2 py-2"></td>
+                  <td class="px-2 py-2"></td>
+                  <td class="px-2 py-2 text-center space-x-3">
+                    <button
+                      aria-label="Download"
+                      class="text-purple-700 hover:text-purple-900"
+                    >
+                      <i class="fas fa-download"></i>
+                    </button>
+                    <button
+                      aria-label="Delete"
+                      class="text-red-600 hover:text-red-800"
+                    >
+                      <i class="fas fa-trash-alt"></i>
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>
