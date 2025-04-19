@@ -4,10 +4,13 @@ from flask_jwt_extended import jwt_required, current_user, unset_jwt_cookies, se
 
 from.index import index_views
 from.dashboard import dashboard_views
+from App.models import User
 
 from App.controllers import (
-    login
+    login,
+    create_user  # Import the create_user function
 )
+from App.database import db  # Import the db object
 
 auth_views = Blueprint('auth_views', __name__, template_folder='../templates')
 
@@ -28,6 +31,8 @@ def identify_page():
     return render_template('message.html', title="Identify", message=f"You are logged in as {current_user.id} - {current_user.username}")
     
 
+
+
 @auth_views.route('/login', methods=['POST'])
 def login_action():
     data = request.form
@@ -40,6 +45,30 @@ def login_action():
         response = redirect(url_for('dashboard_views.dashboard_page'))
         set_access_cookies(response, token) 
     return response
+
+@auth_views.route('/signup', methods=['POST'])
+def signin_action():
+    data = request.form
+    existing_user = User.query.filter_by(username=data['username']).first()
+
+    if existing_user:
+        flash('⚠️ Username already exists. Please choose a different one.', 'error')
+        return redirect(url_for('signup_views.signup_page'))
+    newuser = create_user(data['username'], data['password'])
+    response = None
+    try:
+        db.session.add(newuser)
+        db.session.commit()
+        token = login(data['username'], data['password'])
+        response = redirect(url_for('dashboard_views.dashboard_page'))
+        set_access_cookies(response, token)
+        flash('Account Created!') 
+    except Exception:
+        db.session.rollback()
+        flash('username or email already exists')
+        response = redirect(url_for('index_views.index_page'))
+    return response
+
 
 
 
