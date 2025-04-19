@@ -2,7 +2,6 @@
 
 {% block title %}Dashboard - UWI Statistical Digest Portal{% endblock %}
 
-
 {% block content %}
 <body class="mt-8 bg-gray-300 min-h-screen flex flex-col items-center p-4">
 <header class="w-full max-w-5xl bg-[#36738E] rounded-md flex items-center justify-between p-4 mb-4 select-none">
@@ -25,10 +24,12 @@
      <button class="bg-white text-black rounded-full w-full py-2 mb-4 text-center btn-text font-sans font-semibold" type="button">
       Download Template
      </button>
-     <button class="bg-white text-black rounded-full w-full py-2 mb-4 text-center btn-text font-sans font-semibold" type="button">
-      Upload Sheet
-     </button>
-     <button class="bg-white text-black rounded-full w-full py-2 mb-4 text-center btn-text font-sans font-semibold" type="button">
+     <a href="/upload_sheet">
+        <button class="bg-white text-black rounded-full w-full py-2 mb-4 text-center btn-text font-sans font-semibold" type="button">
+         Upload Sheet
+        </button>
+      </a>
+           <button class="bg-white text-black rounded-full w-full py-2 mb-4 text-center btn-text font-sans font-semibold" type="button">
       Generate Report
      </button>
      <button class="bg-white text-black rounded-full w-full py-2 mb-6 text-center btn-text font-sans font-semibold" type="button">
@@ -38,7 +39,6 @@
      <div class="flex flex-col items-center text-white text-xs font-sans">
       <i class="fas fa-file-export fa-lg mb-1">
       </i>
-      
     </a>
         <span>
         LOG-OUT
@@ -58,10 +58,6 @@
       </span>
      </div>
     </section>
-   </main>
+</main>
 </body>
-   {% endblock %}
- 
- 
-
- 
+{% endblock %}

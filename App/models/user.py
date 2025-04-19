@@ -1,9 +1,10 @@
+from datetime import datetime  # Add this import at the top
 from werkzeug.security import check_password_hash, generate_password_hash
 from App.database import db
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    username =  db.Column(db.String(20), nullable=False, unique=True)
+    username = db.Column(db.String(20), nullable=False, unique=True)
     password = db.Column(db.String(120), nullable=False)
 
     def __init__(self, username, password):
@@ -11,7 +12,7 @@ class User(db.Model):
         self.set_password(password)
 
     def get_json(self):
-        return{
+        return {
             'id': self.id,
             'username': self.username
         }
@@ -24,3 +25,11 @@ class User(db.Model):
         """Check hashed password."""
         return check_password_hash(self.password, password)
 
+class UploadedFile(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    filename = db.Column(db.String(255), nullable=False)
+    filepath = db.Column(db.String(512), nullable=False)
+    upload_date = db.Column(db.DateTime, default=datetime.utcnow)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    
+    user = db.relationship('User', backref=db.backref('uploads', lazy=True))
