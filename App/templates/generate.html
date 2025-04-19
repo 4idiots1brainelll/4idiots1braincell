@@ -1,0 +1,143 @@
+{% extends "layout.html" %}
+
+{% block title %}Generate - UWI Statistical Digest Portal{% endblock %}
+
+
+{% block content %}
+<body class="mt-8 bg-gray-300 min-h-screen flex flex-col items-center p-4">
+<header class="w-full max-w-5xl bg-[#36738E] rounded-md flex items-center justify-between p-4 mb-4 select-none">
+    <img alt="UWI logo with blue shield, orange and white elements, and text UWI below" class="h-16 w-16 object-contain" height="40" src="./static/images/uwi_logo.png" width="40"/>
+    <div class="text-white text-center font-sans flex-1">
+        <p class="text-lg font-semibold leading-tight">
+            UWI STATISTICS PORTAL
+        </p>
+        <p class="text-lg font-semibold leading-tight flex-1">
+            LOGGED IN AS: {{ user.username.upper() }}
+        </p>
+    </div>
+</header>
+<main class="w-full max-w-5xl flex flex-col md:flex-row gap-4">
+    <!-- Sidebar -->
+    <nav class="bg-[#36738E] rounded-md flex flex-col items-center py-6 px-4 min-w-[160px] md:min-w-[180px]">
+    <a href="/dashboard">
+     <button class="bg-white text-black rounded-full w-full py-2 mb-4 text-center btn-text font-sans font-semibold same-size-btn" type="button">
+      Dashboard
+     </button>
+    </a>
+
+     <a href="/download">
+     <button class="bg-white text-black rounded-full w-full py-2 mb-4 text-center btn-text font-sans font-semibold same-size-btn" type="button">
+      Download Template
+     </button>
+     </a>
+     <button class="bg-white text-black rounded-full w-full py-2 mb-4 text-center btn-text font-sans font-semibold same-size-btn" type="button">
+      Upload Sheet
+     </button>
+     
+     <a href="/generate">
+     <button class="bg-white text-black rounded-full w-full py-2 mb-4 text-center btn-text font-sans font-semibold same-size-btn" type="button">
+      Generate Report
+     </button>
+     </a>
+     
+     <button class="bg-white text-black rounded-full w-full py-2 mb-6 text-center btn-text font-sans font-semibold same-size-btn" type="button">
+      View Report
+     </button>
+     <a href="/logout">
+     <div class="flex flex-col items-center text-white text-xs font-sans">
+      <i class="fas fa-file-export fa-lg mb-1">
+      </i>
+      
+    </a>
+        <span>
+        LOG-OUT
+       </span>
+     </div>
+    </nav>
+    <!-- Content -->
+    <section class=" flex-1 flex flex-col gap-4">
+     <div class="bg-gray-600 rounded-md p-6 text-white font-semibold font-sans text-lg text-center">
+      
+            Generate Report
+        
+           <form class="flex justify-center space-x-12 text-[9px] font-semibold tracking-wide">
+            <div class="flex flex-col items-center">
+             <label class="text-gray-300 text-xs mb-3 block text-center" for="year">
+              Choose Year
+             </label>
+             <select class="w-20 rounded text-black text-xs py-1 px-2" id="year" name="year">
+              <option>2024</option>
+              <option>2023</option>
+              <option>2022</option>
+              <option>2021</option>
+             </select>
+            </div>
+            <div class="flex flex-col items-center">
+             <label class="text-gray-300 text-xs mb-3 block text-center" for="campus"> Choose Campus</label>
+             <select class="w-20 rounded text-black text-xs py-1 px-2" id="campus" name="campus">
+              <option>Mona</option>
+              <option>St. Augustine</option>
+              <option>Five Islands</option>
+              <option>Open Campus</option>
+             </select>
+            </div>
+            <div class="flex flex-col items-center">
+             <label class="text-gray-300 text-xs mb-3 block text-center" for="report">
+              Choose Report
+             </label>
+             <select class="w-20 rounded text-black text-xs py-1 px-2" id="report" name="report">
+              <option>Enrollment</option>
+              <option>Staff</option>
+              <option>Custom</option>
+             </select>
+            </div>
+           </form>
+     </div>
+
+
+     <div class="bg-gray-600 rounded-md p-6 text-white font-sans text-lg flex flex-col gap-6">
+        <span class="font-semibold text-center block w-full">
+            Choose Chart Type
+           </span>
+           <form class="flex flex-wrap justify-between max-w-[600px] mx-auto" name="chartType" id="chartType">
+            <div class="flex items-center space-x-2 w-[45%] mb-6">
+             <input checked="" class="w-4 h-4 text-purple-700 bg-gray-100 border-gray-300 rounded-full" id="barChart" name="chartType" type="radio" value="bar"/>
+             <label class="block text-xs font-semibold text-black bg-white px-3 py-1 rounded-sm w-[120px]" for="barChart">
+              Bar Chart
+             </label>
+            </div>
+            <div class="flex items-center space-x-2 w-[45%] mb-6">
+             <input class="w-4 h-4 text-purple-700 bg-gray-100 border-gray-300 rounded-full" id="histogram" name="chartType" type="radio" value="histogram"/>
+             <label class="block text-xs font-semibold text-black bg-white px-3 py-1 rounded-sm w-[120px]" for="histogram">
+              Histogram
+             </label>
+            </div>
+            <div class="flex items-center space-x-2 w-[45%] mb-6">
+             <input class="w-4 h-4 text-purple-700 bg-gray-100 border-gray-300 rounded-full" id="areaChart" name="chartType" type="radio" value="area"/>
+             <label class="block text-xs font-semibold text-black bg-white px-3 py-1 rounded-sm w-[120px]" for="areaChart">
+              Area Chart
+             </label>
+            </div>
+            <div class="flex items-center space-x-2 w-[45%] mb-6">
+             <input class="w-4 h-4 text-purple-700 bg-gray-100 border-gray-300 rounded-full" id="pieChart" name="chartType" type="radio" value="pie"/>
+             <label class="block text-xs font-semibold text-black bg-white px-3 py-1 rounded-sm w-[120px]" for="pieChart">
+              Pie Chart
+             </label>
+            </div>
+            
+            <div class="w-full flex justify-center">
+                <button class="bg-white text-black text-xs font-semibold rounded-full w-[140px] py-2" type="button">
+                    Design Chart
+                </button>
+            </div>
+            
+           </form>
+      
+      
+     </div>
+     </div>
+    </section>
+   </main>
+</body>
+   {% endblock %}
+ 
