@@ -5,58 +5,67 @@
 
 {% block content %}
 
-   <body class="bg-gray-300 min-h-screen flex items-center justify-center p-4">
-    <div class="max-w-6xl w-full space-y-4">
+   <body class="mt-8 bg-gray-300 min-h-screen flex flex-col items-center p-4">
+    <!-- <div class="max-w-6xl w-full space-y-4"> -->
      <!-- Header -->
-     <header class="bg-[#2c6b87] rounded-md shadow-md flex items-center justify-center space-x-4 p-4">
-        <img alt="UWI logo with blue shield, orange and white elements, and text UWI below" class="h-16 w-16 object-contain" height="40" src="./static/images/uwi_logo.png" width="40"/>
-      <div class="text-white text-center font-sans">
-       <p class="text-lg font-normal tracking-wide">
-        UWI STATISTICS PORTAL
-       </p>
-       <p class="text-lg font-normal tracking-wide font-semibold">
-        LOGGED IN AS: {{ user.username.upper() }}
-       </p>
+     <header class="w-full max-w-5xl bg-[#36738E] rounded-md flex items-center justify-between p-4 mb-4 select-none">
+      <img alt="UWI logo with blue shield, orange and white elements, and text UWI below" class="h-16 w-16 object-contain" height="40" src="./static/images/uwi_logo.png" width="40"/>
+      <div class="text-white text-center font-sans flex-1">
+          <p class="text-lg font-semibold leading-tight">
+              UWI STATISTICS PORTAL
+          </p>
+          <p class="text-lg font-semibold leading-tight flex-1">
+              LOGGED IN AS: {{ user.username.upper() }}
+          </p>
       </div>
-     </header>
-     <main class="flex flex-col md:flex-row gap-4">
+      </header>
+     <main class="w-full max-w-5xl flex flex-col md:flex-row gap-4">
       <!-- Sidebar -->
      
-    <nav class="bg-[#36738E] rounded-md flex flex-col items-center py-6 px-4 min-w-[160px] md:min-w-[180px]">
+      <nav class="bg-[#36738E] rounded-md flex flex-col items-center py-6 px-4 min-w-[160px] md:min-w-[180px]">
         <a href="/dashboard">
-        <button class="bg-white text-black rounded-full w-full py-2 mb-4 text-center btn-text font-sans font-semibold same-size-btn" type="button">
-         Dashboard
-        </button>
+         <button class="bg-white text-black rounded-full w-full py-2 mb-4 text-center btn-text font-sans font-semibold same-size-btn" type="button">
+          Dashboard
+         </button>
         </a>
-        
-        <a href="/download">
-        <button class="bg-white text-black rounded-full w-full py-2 mb-4 text-center btn-text font-sans font-semibold same-size-btn" type="button">
-         Download Template
-        </button>
+    
+         <a href="/download">
+         <button class="bg-gray-400 text-black rounded-full w-full py-2 mb-4 text-center btn-text font-sans font-semibold same-size-btn" type="button">
+          Download Template
+         </button>
+         </a>
+    
+    
+         <a href="/upload_sheet">
+            <button class="bg-white text-black rounded-full w-full py-2 mb-4 text-center btn-text font-sans font-semibold same-size-btn" type="button">
+                Upload Sheet
+            </button>
         </a>
-
-        <a href="/upload_sheet">
-        <button class="bg-white text-black rounded-full w-full py-2 mb-4 text-center btn-text font-sans font-semibold same-size-btn" type="button">
-         Upload Sheet
-        </button>
+    
+         <a href="/generate">
+         <button class="bg-white text-black rounded-full w-full py-2 mb-4 text-center btn-text font-sans font-semibold same-size-btn" type="button">
+          Generate Report
+         </button>
+           </a>
+    
+         <a href="/viewreport">
+           <button class="bg-white text-black rounded-full w-full py-2 mb-6 text-center btn-text font-sans font-semibold same-size-btn" type="button">
+              View Report
+             </button>
+         </a>
+    
+       
+         <a href="/logout">
+         <div class="flex flex-col items-center text-white text-xs font-sans">
+          <i class="fas fa-file-export fa-lg mb-1">
+          </i>
+          
         </a>
-        <button class="bg-white text-black rounded-full w-full py-2 mb-4 text-center btn-text font-sans font-semibold same-size-btn" type="button">
-         Generate Report
-        </button>
-        <button class="bg-white text-black rounded-full w-full py-2 mb-6 text-center btn-text font-sans font-semibold same-size-btn" type="button">
-         View Report
-        </button>
-        <a href="/logout">
-        <div class="flex flex-col items-center text-white text-xs font-sans">
-         <i class="fas fa-file-export fa-lg mb-1">
-         </i>
-         
-       </a>
-           <span>
-           LOG-OUT
-          </span>
-        </div>
-       </nav>
+            <span>
+            LOG-OUT
+           </span>
+         </div>
+        </nav>
       <!-- Main Content -->
       <section class="bg-gray-600 rounded-md shadow-md flex flex-col items-center p-8 w-full md:flex-1">
        <h2 class="text-white text-lg font-semibold mb-6">
@@ -98,7 +107,7 @@
       </script>
       </section>
      </main>
-    </div>
+    <!-- </div> -->
    </body>
 {% endblock %}
   
