@@ -1,0 +1,84 @@
+{% extends "layout.html" %}
+
+{% block title %}Admin View Reports - UWI Statistical Digest Portal{% endblock %}
+
+{% block content %}
+<body class="mt-8 bg-gray-300 min-h-screen flex flex-col items-center p-4">
+    <header class="w-full max-w-5xl bg-[#8D362F] rounded-md flex items-center justify-between p-4 mb-4 select-none">
+        <img alt="UWI logo" class="h-16 w-16 object-contain" src="/static/images/uwi_logo.png" />
+        <div class="text-white text-center font-sans flex-1">
+            <p class="text-lg font-semibold leading-tight">UWI STATISTICS PORTAL</p>
+            <p class="text-lg font-semibold leading-tight">ADMIN LOGGED IN AS: {{ user.username.upper() }}</p>
+        </div>
+    </header>
+
+    <main class="w-full max-w-5xl flex flex-col md:flex-row gap-4">
+        <!-- Sidebar -->
+        <nav class="bg-[#8D362F] rounded-md flex flex-col items-center py-6 px-4 min-w-[160px] md:min-w-[180px] space-y-6">
+            <a href="/admin_dashboard">
+             <button class="bg-white text-black rounded-full w-full py-2 mb-4 text-center btn-text font-sans font-semibold same-size-btn" type="button">
+              Dashboard
+             </button>
+            </a>
+        
+             <a href="/admin_uploadTemplate">
+             <button class="bg-white text-black rounded-full w-full py-2 mb-4 text-center btn-text font-sans font-semibold same-size-btn" type="button">
+              Upload Template
+             </button>
+             </a>
+             <a href="/admin_viewreport">
+              <button class="bg-white text-black rounded-full w-full py-2 mb-6 text-center btn-text font-sans font-semibold same-size-btn" type="button">
+                  View Reports
+              </button>
+            </a>
+             <a href="/logout">
+             <div class="flex flex-col items-center text-white text-xs font-sans">
+              <i class="fas fa-file-export fa-lg mb-1">
+              </i>
+              
+            </a>
+                <span>
+                LOG-OUT
+               </span>
+             </div>
+            </nav>
+
+        <!-- Main Content -->
+        <section class="flex-1 bg-gray-600 rounded-md p-4" style="border: 3px solid #8D362F; min-height: 300px">
+            <div class="w-full overflow-x-auto scrollbar-thin">
+                <table class="w-full text-white text-[10px] font-sans table-fixed">
+                    <thead>
+                        <tr>
+                            <th class="w-1/6 text-left px-2 py-1">Tracking ID</th>
+                            <th class="w-1/4 text-left px-2 py-1">UserID</th>
+                            <th class="w-1/6 text-left px-2 py-1">Upload Date</th>
+                            <th class="w-1/6 text-left px-2 py-1">File Name</th>
+                            <th class="w-1/6 text-center px-2 py-1">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for file in uploaded_files %}
+                        <tr>
+                            <td class="px-2 py-2">{{ file.id }}</td>
+                            <td class="px-2 py-2">{{ file.user_id }}</td>
+                            <td class="px-2 py-2">{{ file.upload_date }}</td>
+                            <td class="px-2 py-2">{{ file.filename }}</td>
+                            <td class="px-2 py-2 text-center space-x-3">
+                                <a href="{{ url_for('admin_viewreport_views.admin_download_file', file_id=file.id) }}" class="text-purple-700 hover:text-purple-900">
+                                    <i class="fas fa-download"></i>
+                                </a>
+                                <form method="POST" action="{{ url_for('admin_viewreport_views.admin_delete_file', file_id=file.id) }}" onsubmit="return confirm('Are you sure you want to delete this report and its contents?');" class="inline">
+                                    <button type="submit" class="text-red-600 hover:text-red-800 p-2 rounded-full hover:bg-red-100 transition" aria-label="Delete">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+</body>
+{% endblock %}
