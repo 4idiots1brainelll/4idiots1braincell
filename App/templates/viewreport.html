@@ -1,0 +1,137 @@
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>UWI Statistics Portal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      /* Custom scrollbar for the table container */
+      .scrollbar-thin::-webkit-scrollbar {
+        height: 6px;
+      }
+      .scrollbar-thin::-webkit-scrollbar-thumb {
+        background-color: #4b5563;
+        border-radius: 10px;
+      }
+
+      .same-size-btn {
+        width: 200px;
+        min-width: 200px;
+        max-width: 200px;
+    }
+    </style>
+  </head>
+  <body class="mt-8 bg-gray-300 min-h-screen flex flex-col items-center p-4">
+    <!-- <div class="w-full max-w-7xl bg-gray-300 rounded-md mt-4"> -->
+      <!-- Header -->
+      <header class="w-full max-w-5xl bg-[#36738E] rounded-md flex items-center justify-between p-4 mb-4 select-none">
+        <img alt="UWI logo with blue shield, orange and white elements, and text UWI below" class="h-16 w-16 object-contain" height="40" src="./static/images/uwi_logo.png" width="40"/>
+        <div class="text-white text-center font-sans flex-1">
+            <p class="text-lg font-semibold leading-tight">
+                UWI STATISTICS PORTAL
+            </p>
+            <p class="text-lg font-semibold leading-tight flex-1">
+                LOGGED IN AS: {{ user.username.upper() }}
+            </p>
+        </div>
+    </header>
+
+      <main class="w-full max-w-5xl flex flex-col md:flex-row gap-4">
+        <!-- Sidebar -->
+        <nav class="bg-[#36738E] rounded-md flex flex-col items-center py-6 px-4 min-w-[160px] md:min-w-[180px]">
+          <a href="/dashboard">
+           <button class="bg-white text-black rounded-full w-full py-2 mb-4 text-center btn-text font-sans font-semibold same-size-btn" type="button">
+            Dashboard
+           </button>
+          </a>
+      
+           <a href="/download">
+           <button class="bg-white text-black rounded-full w-full py-2 mb-4 text-center btn-text font-sans font-semibold same-size-btn" type="button">
+            Download Template
+           </button>
+           </a>
+      
+      
+           <a href="/upload_sheet">
+              <button class="bg-white text-black rounded-full w-full py-2 mb-4 text-center btn-text font-sans font-semibold same-size-btn" type="button">
+                  Upload Sheet
+              </button>
+          </a>
+      
+           <a href="/generate">
+      
+           <button class="bg-white text-black rounded-full w-full py-2 mb-4 text-center btn-text font-sans font-semibold same-size-btn" type="button">
+            Generate Report
+           </button>
+             </a>
+      
+           <a href="/viewreport">
+             <button class="bg-gray-400 text-black rounded-full w-full py-2 mb-6 text-center btn-text font-sans font-semibold same-size-btn" type="button">
+                View Report
+               </button>
+           </a>
+      
+         
+           <a href="/logout">
+           <div class="flex flex-col items-center text-white text-xs font-sans">
+            <i class="fas fa-file-export fa-lg mb-1">
+            </i>
+            
+          </a>
+              <span>
+              LOG-OUT
+             </span>
+           </div>
+          </nav>
+
+        <!-- Table container -->
+        <section
+          class="bg-gray-600 rounded-md flex-1 p-4"
+          style="border: 3px solid #2f6d85; min-height: 300px"
+        >
+          <div class="w-full overflow-x-auto scrollbar-thin">
+            <table class="w-full text-white text-[10px] font-sans table-fixed">
+              <thead>
+                <tr>
+                  <th class="w-1/6 text-left px-2 py-1">Tracking ID</th>
+                  <th class="w-1/4 text-left px-2 py-1">Name</th>
+                  <th class="w-1/6 text-left px-2 py-1">Date</th>
+                  <th class="w-1/6 text-left px-2 py-1">Sheet Upload</th>
+                  <th class="w-1/6 text-left px-2 py-1">File Status</th>
+                  <th class="w-1/6 text-center px-2 py-1">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="px-2 py-2"></td>
+                  <td class="px-2 py-2"></td>
+                  <td class="px-2 py-2"></td>
+                  <td class="px-2 py-2"></td>
+                  <td class="px-2 py-2"></td>
+                  <td class="px-2 py-2 text-center space-x-3">
+                    <button
+                      aria-label="Download"
+                      class="text-purple-700 hover:text-purple-900"
+                    >
+                      <i class="fas fa-download"></i>
+                    </button>
+                    <button
+                      aria-label="Delete"
+                      class="text-red-600 hover:text-red-800"
+                    >
+                      <i class="fas fa-trash-alt"></i>
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </main>
+    <!-- </div> -->
+  </body>
+</html>
