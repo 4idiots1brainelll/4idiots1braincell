@@ -4,6 +4,23 @@
 
 
 {% block content %}
+<style>
+    .same-size-btn {
+        width: 200px;
+        min-width: 200px;
+        max-width: 200px;
+    }
+
+       
+        .features {
+            list-style-type: none;
+            padding: 0;
+        }
+        .features li {
+            margin: 10px;
+        }
+  
+</style>
 <body class="mt-8 bg-gray-300 min-h-screen flex flex-col items-center p-4">
 <header class="w-full max-w-5xl bg-[#8D362F] rounded-md flex items-center justify-between p-4 mb-4 select-none">
     <img alt="UWI logo with blue shield, orange and white elements, and text UWI below" class="h-16 w-16 object-contain" height="40" src="./static/images/uwi_logo.png" width="40"/>
@@ -49,15 +66,29 @@
     <!-- Content -->
     <section class=" flex-1 flex flex-col gap-4">
      <div class="bg-gray-600 rounded-md p-3 text-white font-sans text-xs leading-tight min-h-[210px]">
-      WELCOME!
+        <h1 class="text-xl font-semibold mb-2 text-center">Welcome Back, {{ user.username.upper() }}!</h1>
+        <p class="text-center">You are logged in with full system privileges.</p>
+        
+        <p >Explore, analyze, and share verified statistical reports from across the University of the West Indies. Whether you're a researcher, administrator, or curious visitor, our interactive charts and datasets empower you to:</p>
+        <ul class="features">
+            <li>🔍 Discover Trends: Browse perviously created reports with dynamic visualizations.</li>
+            <li>📊 Drive Decisions: Access reliable data to support academic and institutional planning.</li>
+            <li>📤 Contribute: Upload datasets and publish customized reports in minutes</li>
+        
      </div>
-     <div class="bg-gray-600 rounded-md p-3 text-white font-sans text-xs leading-tight min-h-[150px] flex items-start gap-2">
-      <i class="fas fa-exclamation-circle mt-1">
-      </i>
-      <span>
-       Important Guide
-      </span>
-     </div>
+     <div class="bg-gray-600 rounded-md p-3 text-white font-sans text-xs leading-tight min-h-[150px] flex flex-col gap-2">
+        <div class="flex items-start gap-2">
+            <i class="fas fa-exclamation-circle mt-1"></i>
+            <span class="font-semibold">Important Guide</span>
+        </div>
+        <p class="text-sm">As an admin, you have the following administrative responsibilities:</p>
+        <ul class="features">
+            <li>Upload Excel Templates for the use of regular users.</li>
+            <li>View and manage all reports created by regular users.</li>
+            <li>Ensure that all data uploaded is accurate and relevant.</li>
+            
+        </ul>
+    </div>
     </section>
    </main>
 </body>
