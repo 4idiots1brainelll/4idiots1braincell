@@ -10,6 +10,16 @@
         min-width: 200px;
         max-width: 200px;
     }
+
+       
+        .features {
+            list-style-type: none;
+            padding: 0;
+        }
+        .features li {
+            margin: 10px;
+        }
+  
 </style>
 
 <body class="mt-8 bg-gray-300 min-h-screen flex flex-col items-center p-4">
@@ -74,15 +84,28 @@
     <!-- Content -->
     <section class=" flex-1 flex flex-col gap-4">
      <div class="bg-gray-600 rounded-md p-3 text-white font-sans text-xs leading-tight min-h-[210px]">
-      WELCOME!
+    
+      <h1 class="text-xl font-semibold mb-2 text-center">Welcome to the UWI Stat Platform</h1>
+        <p class="text-center">Your Gateway to Transparent, Data-Driven Insights</p>
+        <p >Explore, analyze, and share verified statistical reports from across the University of the West Indies. Whether you're a researcher, administrator, or curious visitor, our interactive charts and datasets empower you to:</p>
+        <ul class="features">
+            <li>🔍 Discover Trends: Browse perviously created reports with dynamic visualizations.</li>
+            <li>📊 Drive Decisions: Access reliable data to support academic and institutional planning.</li>
+            <li>📤 Contribute: Upload datasets and publish customized reports in minutes</li>
      </div>
-     <div class="bg-gray-600 rounded-md p-3 text-white font-sans text-xs leading-tight min-h-[150px] flex items-start gap-2">
-      <i class="fas fa-exclamation-circle mt-1">
-      </i>
-      <span>
-       Important Guide
-      </span>
-     </div>
+    <div class="bg-gray-600 rounded-md p-3 text-white font-sans text-xs leading-tight min-h-[150px] flex flex-col gap-2">
+        <div class="flex items-start gap-2">
+            <i class="fas fa-exclamation-circle mt-1"></i>
+            <span class="font-semibold">Important Guide</span>
+        </div>
+        <p class="text-sm">To ensure the integrity of our platform, please adhere to the following guidelines:</p>
+        <ul class="features">
+            <li>Ensure the use of the provided template files available on the platform's "Download Template Area". NOTE: Templates are made available by the platform administrator.</li>
+            <li>Upload the filled-out template in the "Upload Sheet Area" and choose your desired report type.</li>
+            <li>Once the report is generated, you can view, download or delete it in the "View Report Area".</li>
+            
+        </ul>
+    </div>
     </section>
    </main>
 </body>
