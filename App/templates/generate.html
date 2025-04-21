@@ -63,86 +63,164 @@
     <section class=" flex-1 flex flex-col gap-4">
      <div class="bg-gray-600 rounded-md p-6 text-white font-semibold font-sans text-lg text-center">
       
-            Generate Report
         
-           <form class="flex justify-center space-x-12 text-[9px] font-semibold tracking-wide">
-            <div class="flex flex-col items-center">
-             <label class="text-gray-300 text-xs mb-3 block text-center" for="year">
-              Choose Year
-             </label>
-             <select class="w-20 rounded text-black text-xs py-1 px-2" id="year" name="year">
-              <option>2024</option>
-              <option>2023</option>
-              <option>2022</option>
-              <option>2021</option>
-             </select>
-            </div>
-            <div class="flex flex-col items-center">
-             <label class="text-gray-300 text-xs mb-3 block text-center" for="campus"> Choose Campus</label>
-             <select class="w-20 rounded text-black text-xs py-1 px-2" id="campus" name="campus">
-              <option>Mona</option>
-              <option>St. Augustine</option>
-              <option>Five Islands</option>
-              <option>Open Campus</option>
-             </select>
-            </div>
-            <div class="flex flex-col items-center">
-             <label class="text-gray-300 text-xs mb-3 block text-center" for="report">
-              Choose Report
-             </label>
-             <select class="w-20 rounded text-black text-xs py-1 px-2" id="report" name="report">
-              <option>Enrollment</option>
-              <option>Staff</option>
-              <option>Custom</option>
-             </select>
-            </div>
-           </form>
-     </div>
+            <form id="generateForm" method="POST" action="/generate_chart_data">
+                <div class="bg-gray-600 rounded-md p-6 text-white font-semibold font-sans text-lg text-center">
+                    Generate Report
+                    <div class="flex justify-center space-x-12 text-[9px] font-semibold tracking-wide mt-4">
+                        <div class="flex flex-col items-center">
+                            <label class="text-gray-300 text-xs mb-3 block text-center" for="year">Choose Year</label>
+                            <select class="w-20 rounded text-black text-xs py-1 px-2" id="year" name="year">
+
+                                <!-- <option>2024</option>
+                                <option>2023</option>
+                                <option>2022</option>
+                                <option>2021</option> -->
+                                {% for year in unique_years %}
+                                <option value="{{ year }}">{{ year }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="flex flex-col items-center">
+                            <label class="text-gray-300 text-xs mb-3 block text-center" for="campus">Choose Campus</label>
+                            <select class="w-20 rounded text-black text-xs py-1 px-2" id="campus" name="campus">
 
 
-     <div class="bg-gray-600 rounded-md p-6 text-white font-sans text-lg flex flex-col gap-6">
-        <span class="font-semibold text-center block w-full">
-            Choose Chart Type
-           </span>
-           <form class="flex flex-wrap justify-between max-w-[600px] mx-auto" name="chartType" id="chartType">
-            <div class="flex items-center space-x-2 w-[45%] mb-6">
-             <input checked="" class="w-4 h-4 text-purple-700 bg-gray-100 border-gray-300 rounded-full" id="barChart" name="chartType" type="radio" value="bar"/>
-             <label class="block text-xs font-semibold text-black bg-white px-3 py-1 rounded-sm w-[120px]" for="barChart">
-              Bar Chart
-             </label>
-            </div>
-            <div class="flex items-center space-x-2 w-[45%] mb-6">
-             <input class="w-4 h-4 text-purple-700 bg-gray-100 border-gray-300 rounded-full" id="histogram" name="chartType" type="radio" value="histogram"/>
-             <label class="block text-xs font-semibold text-black bg-white px-3 py-1 rounded-sm w-[120px]" for="histogram">
-              Histogram
-             </label>
-            </div>
-            <div class="flex items-center space-x-2 w-[45%] mb-6">
-             <input class="w-4 h-4 text-purple-700 bg-gray-100 border-gray-300 rounded-full" id="areaChart" name="chartType" type="radio" value="area"/>
-             <label class="block text-xs font-semibold text-black bg-white px-3 py-1 rounded-sm w-[120px]" for="areaChart">
-              Area Chart
-             </label>
-            </div>
-            <div class="flex items-center space-x-2 w-[45%] mb-6">
-             <input class="w-4 h-4 text-purple-700 bg-gray-100 border-gray-300 rounded-full" id="pieChart" name="chartType" type="radio" value="pie"/>
-             <label class="block text-xs font-semibold text-black bg-white px-3 py-1 rounded-sm w-[120px]" for="pieChart">
-              Pie Chart
-             </label>
-            </div>
+                                <!-- <option>Mona</option>
+                                <option>St. Augustine</option>
+                                <option>Five Islands</option>
+                                <option>Open Campus</option> -->
+                                {% for campus in unique_campuses %}
+                                <option value="{{ campus }}">{{ campus }}</option>
+                                {% endfor %}
+
+                            </select>
+                        </div>
+                        <div class="flex flex-col items-center">
+                            <label class="text-gray-300 text-xs mb-3 block text-center" for="report">Choose Report</label>
+                            <select class="w-20 rounded text-black text-xs py-1 px-2" id="report" name="report">
+                                <!-- <option>Enrollment</option>
+                                <option>Staff</option>
+                                <option>Custom</option> -->
+                                {% for report in unique_reports %}
+                                <option value="{{ report }}">{{ report }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                </div>
             
-            <div class="w-full flex justify-center">
-                <button class="bg-white text-black text-xs font-semibold rounded-full w-[140px] py-2" type="button">
-                    Design Chart
-                </button>
-            </div>
-            
-           </form>
+                <div class="bg-gray-600 rounded-md p-6 text-white font-sans text-lg flex flex-col gap-6 mt-6">
+                    <span class="font-semibold text-center block w-full">Choose Chart Type</span>
+                    <div class="flex flex-wrap justify-between max-w-[600px] mx-auto">
+                        <div class="flex items-center space-x-2 w-[45%] mb-6">
+                            <input class="w-4 h-4" id="barChart" name="chartType" type="radio" value="bar" checked />
+                            <label class="text-xs font-semibold text-black bg-white px-3 py-1 rounded-sm w-[120px]" for="barChart">Bar Chart</label>
+                        </div>
+                        <div class="flex items-center space-x-2 w-[45%] mb-6">
+                            <input class="w-4 h-4" id="histogram" name="chartType" type="radio" value="histogram" />
+                            <label class="text-xs font-semibold text-black bg-white px-3 py-1 rounded-sm w-[120px]" for="histogram">Histogram</label>
+                        </div>
+                        <div class="flex items-center space-x-2 w-[45%] mb-6">
+                            <input class="w-4 h-4" id="areaChart" name="chartType" type="radio" value="area" />
+                            <label class="text-xs font-semibold text-black bg-white px-3 py-1 rounded-sm w-[120px]" for="areaChart">Area Chart</label>
+                        </div>
+                        <div class="flex items-center space-x-2 w-[45%] mb-6">
+                            <input class="w-4 h-4" id="pieChart" name="chartType" type="radio" value="pie" />
+                            <label class="text-xs font-semibold text-black bg-white px-3 py-1 rounded-sm w-[120px]" for="pieChart">Pie Chart</label>
+                        </div>
+                    </div>
+                    <div class="w-full flex justify-center">
+                        <button id="designChartBtn" class="bg-white text-black text-xs font-semibold rounded-full w-[140px] py-2" type="submit">
+                            Design Chart
+                        </button>
+                    </div>
+
+                    <div id="chartContainer" style="width:100%; height:400px;"></div>
+
+                </div>
+            </form>
+           
       
-      
+
      </div>
      </div>
     </section>
    </main>
 </body>
    {% endblock %}
+{% block scripts %}
+<script src="https://code.highcharts.com/highcharts.js"></script>
+
+<script>
+    document.getElementById('generateForm').addEventListener('submit', async (event) => {
+        event.preventDefault();  // Prevent default form submission
+
+        const year = document.getElementById('year').value;
+        const campus = document.getElementById('campus').value;
+        const report = document.getElementById('report').value;
+        const chartType = document.querySelector('input[name="chartType"]:checked').value;
+
+        const formData = new FormData();
+        formData.append('year', year);
+        formData.append('campus', campus);
+        formData.append('report', report);
+        formData.append('chartType', chartType);
+
+        try {
+            const response = await fetch('/generate_chart_data', {
+                method: 'POST',
+                body: formData
+            });
+
+            const result = await response.json();
+
+            if (!response.ok) {
+                alert(result.error || result.message || 'Something went wrong');
+                return;
+            }
+
+            renderChart(result.chartType, result.data);
+
+        } catch (error) {
+            console.error('Error generating chart:', error);
+            alert('Error generating chart');
+        }
+    });
+
+    function renderChart(chartType, data) {
+        const chartContainer = document.getElementById('chartContainer');
+        chartContainer.style.display = 'block';
+
+        if (window.generatedChart) {
+            window.generatedChart.destroy();
+        }
+
+        const labels = data.map(item => item.label);
+        const values = data.map(item => item.value);
+
+        window.generatedChart = Highcharts.chart('chartContainer', {
+            chart: {
+                type: chartType === 'histogram' ? 'column' : chartType
+            },
+            title: {
+                text: 'Generated Report'
+            },
+            xAxis: {
+                categories: labels
+            },
+            yAxis: {
+                title: {
+                    text: 'Metric Value'
+                }
+            },
+            series: [{
+                name: 'Data Series',
+                data: values
+            }]
+        });
+    }
+</script>
+
+{% endblock %}    
  
