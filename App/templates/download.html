@@ -75,10 +75,10 @@
         Select Template
        </label>
        <select aria-label="Select Template" class="w-48 rounded-md p-2 mb-12 text-black" id="template-select">
-          {% for template in templates %}
-            <option value="{{ template.filepath }}">{{ template.filename }}</option>
-          {% endfor %}
-       </select>
+        {% for template in templates %}
+          <option value="{{ url_for('static', filename='uploads/templates/' ~ template.filename) }}">{{ template.filename }}</option>
+        {% endfor %}
+      </select>
     
        <button id="download-btn" class="bg-white text-black text-xs font-extrabold py-2 rounded-full w-40">
         Download
