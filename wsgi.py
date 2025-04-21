@@ -18,7 +18,6 @@ migrate = get_migrate(app)
 @app.cli.command("init", help="Creates and initializes the database")
 def init():
     initialize()
-    create_admin("admin", "adminpass")
     print('database intialized')
 
 '''
