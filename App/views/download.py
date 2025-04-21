@@ -13,3 +13,4 @@ def download_template():
     templates = TemplateFile.query.all()
     user = User.query.first()
     return render_template("download.html" , user=user, templates=templates)
+
